@@ -42,21 +42,8 @@ prob_2 = multivariate_normal.pdf(data, mean_2[-1], cov_2)
 
 group.append(np.where(prob_1 > prob_2, group_1, group_2))
 
-'Step 2'
-mean_1.append(np.mean(data[group[-1]==group_1], axis=0))
-cov_1 = np.cov(data[group[-1]==group_1], rowvar=0)
-
-mean_2.append(np.mean(data[group[-1]==group_2], axis=0))
-cov_2 = np.cov(data[group[-1]==group_2], rowvar=0)
-
-prob_1 = multivariate_normal.pdf(data, mean_1[-1], cov_1)
-prob_2 = multivariate_normal.pdf(data, mean_2[-1], cov_2)
-
-group.append(np.where(prob_1 > prob_2, group_1, group_2))
-
-
 'Steps till groups no longer change'
-while np.any(group[-1] != group[-2]):
+while len(group) < 2 or np.any(group[-1] != group[-2]):
     mean_1.append(np.mean(data[group[-1]==group_1], axis=0))
     cov_1 = np.cov(data[group[-1]==group_1], rowvar=0)
 
