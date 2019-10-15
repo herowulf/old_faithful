@@ -7,7 +7,7 @@ from scipy.stats import multivariate_normal
 
 
 data = np.genfromtxt('data.txt', usecols=(1,2))
-
+# normalise
 data = (data - np.mean(data, axis=0))/np.std(data, axis=0)
 
 
